@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTrack - Carbon Footprint Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+            color: black;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar a:hover {
+            color: #f1c40f;
+        }
+
+        .chatbot-icon {
+            bottom: 20px;
+            right: 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            height: 600px;
+            background: url("{{ url_for('static', filename='images/blog2.jpg') }}") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 42px;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            animation: fadeIn 2s ease-in-out;
+            color: #f1c40f;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 50px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #1a3d7c;
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-box {
+            background: #eef2f3;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Zigzag Section */
+        .zigzag-section {
+            padding: 80px 50px;
+            background: #f8f9fa;
+        }
+
+        .zigzag-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: white;  /* Alternating background */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .zigzag-container.reverse {
+            flex-direction: row-reverse;
+            background: #eef2f3; /* Light grey for opposite sections */
+        }
+
+        .zigzag-text {
+            width: 50%;
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .zigzag-text h2 {
+            color: #1a3d7c;
+            margin-bottom: 15px;
+        }
+
+        .zigzag-image {
+            width: 50%;
+        }
+
+        .zigzag-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .zigzag-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .zigzag-container.reverse {
+                flex-direction: column;
+            }
+
+            .zigzag-text, .zigzag-image {
+                width: 100%;
+            }
+
+            .zigzag-text {
+                margin-bottom: 20px;
+            }
+        }
+
+
+
+        /* Signup Section */
+        .signup-section {
+            position: relative;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .signup-section img {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+            filter: brightness(50%) blur(1px);
+            animation: backgroundEffect 5s infinite alternate ease-in-out;
+        }
+
+        .signup-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            color: black;
+        }
+
+        .signup-box button {
+            padding: 12px 25px;
+            background: #f1c40f;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .signup-box button:hover {
+            background: #d4ac0d;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: #121a25;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #f1c40f;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/GreenTrack_logo.jpg') }}" alt="GreenTrack Logo">
+            <h1>GreenTrack</h1>
+        </div>
+        <nav>
+            <a href="/features">Features</a>
+            <a href="/calculator">Calculate</a>
+           <a href="/community">Community</a>
+            <a href="/donation">Donation</a>
+            <a href="/contact">Contact</a>
+        </nav>
+         <button class="chatbot-icon" onclick="redirectToChat()">💬</button>
+
+    <script>
+        function redirectToChat() {
+            window.location.href = "/recycle"; // Change "/chat" to your chatbot page URL
+        }
+    </script>
+    </div>
+
+    <div class="hero">Join the Green Movement & Reduce Your Carbon Footprint!</div>
+
+    <div class="features" id="features">
+        <h2>Key Features</h2>
+        <div class="features-container">
+            <div class="feature-box">Track Carbon Footprint Efficiently with Real-Time Data</div>
+            <div class="feature-box">Get Personalized, Actionable Tips to Reduce Waste</div>
+            <div class="feature-box">Compete in Community Challenges & Earn Rewards</div>
+        </div>
+    </div>
+    <div class="zigzag-section">
+        <div class="zigzag-container">
+            <div class="zigzag-text">
+                <h2>Understanding Your Carbon Footprint</h2>
+                <p>
+                    Your carbon footprint is the total amount of greenhouse gases produced
+                    to support your lifestyle. From the energy used in your home to the food
+                    you consume and the transportation you take, every action impacts the environment.
+                    By understanding your footprint, you can make informed choices that reduce emissions.
+                    Small changes like using energy-efficient appliances, minimizing food waste,
+                    and choosing sustainable products can significantly lower your impact.
+                    GreenTrack helps you measure and manage your carbon emissions with ease.
+                    Start making a difference today by taking control of your footprint!
+                </p>
+            </div>
+            <div class="zigzag-image">
+                <img src="{{ url_for('static', filename='images/i1.jpg') }}" alt="Understanding Carbon Footprint">
+            </div>
+        </div>
+
+        <div class="zigzag-container reverse">
+            <div class="zigzag-image">
+                <img src="{{ url_for('static', filename='images/i2.jpg') }}" alt="Sustainable Lifestyle">
+            </div>
+            <div class="zigzag-text">
+                <h2>Adopting a Sustainable Lifestyle</h2>
+                <p>
+                    Living sustainably means making conscious choices that benefit both
+                    the environment and future generations. Opting for renewable energy,
+                    reducing single-use plastics, and supporting eco-friendly businesses
+                    are great starting points. Sustainable living also involves efficient
+                    water usage, reducing unnecessary travel, and composting organic waste.
+                    The power of collective action can bring meaningful change, and by tracking
+                    your habits, you stay motivated to do more. GreenTrack provides actionable
+                    insights to help you lead a greener life. Join the movement towards a
+                    cleaner, healthier planet!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="signup-section" id="signup">
+        <img src="{{ url_for('static', filename='images/pic2.jpg') }}" alt="Signup Background">
+        <div class="signup-box">
+            <h2>Join GreenTrack Today</h2>
+            <p>Sign up and start tracking your carbon footprint effectively.</p>
+            <button>Get Started</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 GreenTrack. All rights reserved. <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+    </div>
+</body>
+</html>
