@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .navbar a {
+            color: #28a745;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #1e7e34;
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('{{ url_for("static",filename="images/community.jpg") }}') no-repeat center center/cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: heroAnimation 2s ease-in-out;
+        }
+
+        @keyframes heroAnimation {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            font-weight: 400;
+            margin-top: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Content Section */
+        .content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content h2 {
+            font-size: 36px;
+            color: #28a745;
+            margin-bottom: 30px;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Container for community boxes */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            animation: fadeIn 3s ease-out;
+        }
+
+        .box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .box h2 {
+            font-size: 22px;
+            color: #28a745;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .box ul li {
+            padding: 10px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .box ul li:hover {
+            background-color: #e3f9e5;
+        }
+
+        /* Call to Action Button */
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta a {
+            background: #28a745;
+            color: white;
+            padding: 18px 35px;
+            font-size: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta a:hover {
+            background: #1e7e34;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: #28a745;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer p {
+            font-size: 14px;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Real-Time Data Section */
+        .real-time-data {
+            background-color: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .real-time-data p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .real-time-data h3 {
+            color: #28a745;
+            font-size: 2em;
+        }
+
+        /* Media Query for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                height: 50vh;
+                font-size: 2.5em;
+            }
+
+            .content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><a href="#">🌱 Carbon Calculator</a></div>
+        <div>
+            <a href="/features">Features</a>
+            <a href="/contact">Contact</a>
+            <a href="/community">Community</a>
+            <a href="/calculator">Calculator</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        Join Our Sustainability Community
+        <p>Connect, Share, and Make a Difference</p>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Become a Part of Our Green Revolution</h2>
+        <p>Our community is a space for individuals who are passionate about sustainability. Together, we can make a real impact in reducing carbon footprints and driving environmental change.</p>
+    </div>
+
+    <!-- Community Sections -->
+    <div class="container">
+        <div class="box">
+            <h2>🌍 Communities You Can Join</h2>
+            <ul>
+                <li><strong>Green Warriors</strong> - Global group focused on climate action.</li>
+                <li><strong>Eco Innovators</strong> - Innovating sustainable solutions for the future.</li>
+                <li><strong>Carbon Reducers</strong> - Join forces to lower carbon emissions.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>📝 Latest Blogs</h2>
+            <ul>
+                <li><strong>10 Easy Ways to Reduce Your Carbon Footprint</strong> - Practical eco-friendly tips.</li>
+                <li><strong>How Renewable Energy is Changing the World</strong> - Insights on clean energy.</li>
+                <li><strong>The Science of Climate Change</strong> - Understanding global environmental shifts.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>🇮🇳 Government Initiatives</h2>
+            <ul>
+                <li><strong>National Solar Mission</strong> - Promote solar energy.</li>
+                <li><strong>Swachh Bharat Abhiyan</strong> - Clean India campaign.</li>
+                <li><strong>National Electric Mobility Plan</strong> - Supporting electric transport.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Real-Time Data Section -->
+    <div class="real-time-data" id="real-time-data">
+        <h3>📊 Real-Time Carbon Emissions</h3>
+        <p>Loading real-time data...</p>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta">
+        <a href="#contact">Join the Community</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Carbon Footprint Calculator. All Rights Reserved.</p>
+    </div>
+
+    <!-- Real-time Data Fetch Script -->
+    <script>
+        async function fetchRealTimeData() {
+            try {
+                const response = await fetch('https://api.co2signal.com/v1/latest?token=YOUR_API_TOKEN');
+                const data = await response.json();
+                const emissions = data.data.carbonIntensity;
+                document.getElementById('real-time-data').innerHTML = `
+                    <h3>📊 Real-Time Carbon Emissions</h3>
+                    <p>Current Carbon Intensity: <strong>${emissions} gCO2/kWh</strong></p>
+                `;
+            } catch (error) {
+                document.getElementById('real-time-data').innerHTML = `
+                    <h3>📊 Real-Time Carbon Emissions</h3>
+                    <p>Error fetching data. Please try again later.</p>
+                `;
+            }
+        }
+
+        fetchRealTimeData();
+    </script>
+
+</body>
+</html>

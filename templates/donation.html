@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Form</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .donation-form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .donation-form h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 18px;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #ff9e00;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: green;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: green;
+        }
+
+        .form-group button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            font-size: 16px;
+            margin-top: 20px;
+            color: #28a745;
+        }
+
+        .error-message {
+            color: #dc3545;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 600px) {
+            .donation-form {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="donation-form">
+        <h2>Donate to Our Cause</h2>
+        <form id="donationForm" action="/submit" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Donation Amount (₹):</label>
+                <input type="number" id="amount" name="amount" required placeholder="Enter donation amount in Rupees" min="1">
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit Donation</button>
+            </div>
+
+            <div id="formMessage" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // Live input validation and dynamic feedback
+        const donationForm = document.getElementById('donationForm');
+        const amountInput = document.getElementById('amount');
+        const formMessage = document.getElementById('formMessage');
+
+        // Adding currency formatting (Rupees)
+        amountInput.addEventListener('input', function (e) {
+            let value = e.target.value;
+            if (value) {
+                e.target.value = formatCurrency(value);
+            }
+        });
+
+        function formatCurrency(value) {
+            return value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas for thousands
+        }
+
+        // Form submission event listener
+        donationForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const amount = amountInput.value.replace(/,/g, ''); // Remove commas for the backend
+
+            // Basic form validation
+            if (!name || !email || !amount) {
+                formMessage.textContent = "Please fill in all the fields!";
+                formMessage.className = 'error-message';
+                return;
+            }
+
+            // Show confirmation message (simulating form submission)
+            formMessage.textContent = `Thank you, ${name}! Your donation of ₹${formatCurrency(amount)} has been received.`;
+            formMessage.className = 'message';
+
+            // In a real application, this is where you'd send the form data to your server (AJAX or normal submit)
+            donationForm.submit(); // Uncomment this line if using traditional form submission
+        });
+    </script>
+
+</body>
+</html>

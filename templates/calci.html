@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar a:hover {
+            color: #f1c40f;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background: #2c7a2c;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #1e5d1e;
+            transform: scale(1.05);
+        }
+
+        .charts-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .chart-box {
+            width: 45%;
+            min-width: 300px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+    </nav>
+</div>
+
+<div class="container">
+    <h1 style="color: #2c7a2c;">🌱 Carbon Footprint Calculator 🌍</h1>
+    <form id="calculator-form" style="display: flex; flex-direction: column;">
+        <label for="electricity">Electricity Usage (kWh):</label>
+        <input type="number" id="electricity" name="electricity" required>
+
+        <label for="water">Water Usage (Liters):</label>
+        <input type="number" id="water" name="water" required>
+
+        <label for="food_waste">Food Waste (kg):</label>
+        <input type="number" id="food_waste" name="food_waste" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+    <h2 id="result"></h2>
+</div>
+
+<div class="charts-container">
+    <div class="chart-box">
+        <canvas id="carbonChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <canvas id="pieChart"></canvas>
+    </div>
+</div>
+
+<script>
+    let carbonChart, pieChart;
+    document.getElementById("calculator-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const electricity = parseFloat(document.getElementById("electricity").value);
+        const water = parseFloat(document.getElementById("water").value);
+        const foodWaste = parseFloat(document.getElementById("food_waste").value);
+        const carbonFootprint = (electricity * 0.5) + (water * 0.002) + (foodWaste * 2.5);
+        document.getElementById("result").innerText = `📊 Estimated Carbon Footprint: ${carbonFootprint.toFixed(2)} kg CO₂`;
+
+        updateCharts(electricity, water, foodWaste, carbonFootprint);
+    });
+
+    function updateCharts(electricity, water, foodWaste, carbonFootprint) {
+        const ctx1 = document.getElementById("carbonChart").getContext("2d");
+        if (carbonChart) carbonChart.destroy();
+        carbonChart = new Chart(ctx1, {
+            type: "bar",
+            data: {
+                labels: ["Electricity", "Water", "Food Waste", "Carbon Footprint"],
+                datasets: [{
+                    label: "Resource Consumption & Carbon Footprint",
+                    data: [electricity, water, foodWaste, carbonFootprint],
+                    backgroundColor: ["blue", "green", "red", "black"]
+                }]
+            }
+        });
+
+        const ctx2 = document.getElementById("pieChart").getContext("2d");
+        if (pieChart) pieChart.destroy();
+        pieChart = new Chart(ctx2, {
+            type: "pie",
+            data: {
+                labels: ["Electricity", "Water", "Food Waste"],
+                datasets: [{
+                    data: [electricity, water, foodWaste],
+                    backgroundColor: ["blue", "green", "red"]
+                }]
+            }
+        });
+    }
+</script>
+
+<div class="footer">
+    <p>&copy; 2025 GreenTrack. All rights reserved. <a href="/cfp">Know More</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy Policy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .navbar {
+            background: #2c7d59;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #007BFF;
+            text-align: center;
+        }
+        h2 {
+            border-bottom: 3px solid #007BFF;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            text-transform: uppercase;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .policy-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            transition: all 0.3s ease-in-out;
+        }
+        .policy-section:hover {
+            background: #e8f4ff;
+            transform: scale(1.02);
+        }
+        .policy-icon {
+            font-size: 30px;
+            color: #007BFF;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #007BFF;
+            color: white;
+            margin-top: 30px;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            font-size: 20px;
+        }
+        .scroll-to-top:hover {
+            background: #0056b3;
+        }
+         .footer {
+            background: #2c7d59;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+        <a href="/">Home</a>
+        <a href="/features">About</a>
+        <!--<a href="/contactus">Contact</a>-->
+    </div>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p style="text-align:center;"><strong>Last Updated:</strong>24 February 2025</p>
+
+        <div id="policies"></div>
+
+        <footer>
+            <p>&copy; <span id="year"></span> GreenTrack. All Rights Reserved.</p>
+        </footer>
+
+        <button class="scroll-to-top" onclick="scrollToTop()">&#8679;</button>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        window.onscroll = function() {
+            let btn = document.querySelector('.scroll-to-top');
+            if (document.documentElement.scrollTop > 200) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let policies = [
+            "📜 Introduction: We are committed to protecting your privacy.",
+            "📊 Data We Collect: Includes personal and non-personal information.",
+            "🔍 How We Use Your Data: For improving services and personalization.",
+            "🤝 Third-Party Data Sharing: Shared only with trusted partners.",
+            "🍪 Cookies & Tracking: We use cookies for analytics and personalization.",
+            "🔐 Security Measures: Strong security protocols to protect your data.",
+            "⏳ Data Retention: We store data only as long as necessary.",
+            "👤 User Rights: You can access, edit, or delete your data.",
+            "👶 Children's Privacy: No data is collected from users under 13.",
+            "⚖️ Legal Compliance: We comply with GDPR, CCPA, and other laws.",
+            "📧 Marketing Communications: You can opt out of marketing emails.",
+            "🔗 Third-Party Links: We are not responsible for external links.",
+            "🚨 Data Breach Notification: We notify you in case of a breach.",
+            "📍 Location Data: Collected only with your consent.",
+            "💳 Payment Information: Secure payment processing through third parties.",
+            "✅ User Consent: By using our services, you accept these policies.",
+            "📈 Analytics: We track usage data to improve user experience.",
+            "🌍 International Data Transfers: Data may be processed globally.",
+            "🤖 Automated Decision Making: Some services use automation.",
+            "🧑‍💻 Employee Access: Only authorized employees handle sensitive data.",
+            "🔑 Account Protection: We recommend strong passwords for security.",
+            "✏️ Data Corrections: You can request modifications to your data.",
+            "📣 Advertising Policies: Personalized ads may be displayed.",
+            "🔄 Social Media Integration: We collect data from connected accounts.",
+            "🔔 Push Notifications: You can control notification preferences.",
+            "🛡️ Biometric Data: If applicable, securely stored with consent.",
+            "📂 Email Data Storage: We keep emails for reference and service improvement.",
+            "💬 User Feedback Storage: Reviews and feedback may be stored.",
+            "☁️ Cloud Data Storage: Some data is stored on secure cloud services.",
+            "🕵️‍♂️ Fraud Prevention: We use AI to detect and prevent fraud.",
+            "🌐 IP Tracking: Used for security and access verification.",
+            "📡 Geolocation Services: Helps improve local services.",
+            "📢 User Reports: You can report privacy violations.",
+            "⚙️ AI Processing: Some features are powered by AI.",
+            "🔄 Software Updates: Data collected for improving services.",
+            "📜 Policy Updates: We may update this policy periodically.",
+            "🚪 Account Termination: Your data is deleted upon account closure.",
+            "🎭 Service Customization: We use data for tailored experiences.",
+            "📊 User Behavior Tracking: Helps optimize platform features."
+        ];
+
+        let policyContainer = document.getElementById("policies");
+        policies.forEach((policy, index) => {
+            policyContainer.innerHTML += `
+                <div class="policy-section">
+                    <span class="policy-icon">${policy.split(' ')[0]}</span>
+                    <p><strong>${index + 1}. ${policy.substring(2)}</strong></p>
+                </div>`;
+        });
+    </script>
+<div class="footer">
+        <p>&copy; 2025 Smart Sustainability Assistant. All rights reserved.</p>
+    </div>
+</body>
+</html>

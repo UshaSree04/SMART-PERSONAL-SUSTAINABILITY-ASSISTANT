@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTrack - Features</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 20px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: #ffcb42;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('static/images/fb.jpg') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-size: 50px;
+            font-weight: 600;
+            padding: 30px;
+            animation: fadeIn 2s ease-out;
+        }
+
+
+
+        /* Features Section */
+        .features {
+            padding: 80px 50px;
+            text-align: center;
+            background: #fff;
+            position: relative;
+        }
+
+        .features h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-box {
+            width: 320px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .feature-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box p {
+            font-size: 18px;
+            color: #444;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-box:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer p {
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #ffcb42;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .features-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero {
+                height: 60vh;
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .navbar a {
+                margin-right: 0;
+                padding: 12px 18px;
+            }
+
+            .hero {
+                height: 50vh;
+                font-size: 28px;
+            }
+
+            .feature-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="/" style="font-size: 24px; font-weight: 600; color: #ffcb42;">GreenTrack</a>
+        </div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/features">Features</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Empowering You for a Greener Tomorrow</h1>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features" id="features">
+        <h2>Our Key Features</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <img src="static/images/f1.jpg" alt="Track">
+                <p>Track Your Carbon Footprint with Real-Time Data</p>
+            </div>
+            <div class="feature-box">
+                <img src="static/images/f2.jpg" alt="Tips">
+                <p>Personalized Eco Tips to Reduce Your Waste</p>
+            </div>
+            <div class="feature-box">
+                <img src="static/images/f3.jpg" alt="Challenges">
+                <p>Engage in Eco Challenges and Win Rewards</p>
+            </div>
+            <div class="feature-box">
+                <img src="static/images/f4.jpg" alt="Challenges">
+            </div>
+            <div class="feature-box">
+                <img src="static/images/f5.jpg" alt="Challenges">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 GreenTrack. All rights reserved. <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+    </div>
+
+</body>
+
+</html>
